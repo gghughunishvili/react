@@ -14,7 +14,7 @@
         <script type="text/babel">
             class Note extends React.Component {
                 constructor(props) {
-                    super(props);
+                    super(props)
                     this.state = {editing: false}
                 }
                 
@@ -23,11 +23,12 @@
                 }
 
                 save () {
+                    this.props.onChange(this.refs.newText.value, this.props.id)
                     this.setState({editing: false})
                 }
                 
                 remove () {
-                    alert('Deleting the note')
+                    this.props.onRemove(this.props.id)
                 }
 
                 renderForm () {
@@ -53,17 +54,60 @@
                 render () {
                     if  (this.state.editing) {
                         return this.renderForm()
-                    }else{
+                    } else {
                         return this.renderDisplay()
                     }
                 }
             }
 
             class Board extends React.Component {
+                constructor(props) {
+                    super(props)
+                    this.state = {
+                        notes: [
+                            {id: 0, note:'Call Jeffrey'},
+                            {id: 1, note:'Study some VueJs'},
+                            {id: 2, note:'Do some Karate'},
+                            {id: 3, note:'Katas Only'},
+                            {id: 4, note:'Don\'t try it, just do it'},
+                        ]
+                    }
+
+                    this.update = this.update.bind(this)
+                    this.remove = this.remove.bind(this)
+                    this.eachNote = this.eachNote.bind(this)
+                }
+
+                update (newText, id) {
+                    var notes = this.state.notes.map(
+                        note => (note.id !== id) ? 
+                            note : 
+                            {
+                                ...note,
+                                note: newText
+                            }
+                    )
+                    this.setState({notes})
+                }
+
+                remove (id) {
+                    var notes = this.state.notes.filter(note => note.id !== id)
+                    this.setState({notes})
+                }
+
+                eachNote (note) {
+                    return <Note key={note.id} 
+                                 id={note.id}
+                                 onChange={this.update}
+                                 onRemove={this.remove}>
+                                    {note.note}
+                            </Note>
+                }
+
                 render () {
                     return (
                         <div className="board">
-                            {this.props.count}
+                            {this.state.notes.map(this.eachNote)}
                         </div>
                     )
                 }
@@ -81,7 +125,7 @@
                 }
             }
 
-            ReactDOM.render(<Board count={1000}></Board>,
+            ReactDOM.render(<Board count={10}></Board>,
                 document.getElementById('react-container'))
         </script>
     </body>
