@@ -33,7 +33,7 @@
                 renderForm () {
                     return (
                         <div className="note">
-                            <textarea></textarea>
+                            <textarea ref="newText"></textarea>
                             <button onClick={this.save.bind(this)}>Save</button>
                         </div>
                     )
@@ -59,7 +59,29 @@
                 }
             }
 
-            ReactDOM.render(<Note>Testing Note</Note>,
+            class Board extends React.Component {
+                render () {
+                    return (
+                        <div className="board">
+                            {this.props.count}
+                        </div>
+                    )
+                }
+            }
+
+            Board.propTypes = {
+                count: function (props, propName) {
+                    if  (typeof props[propName] !== "number") {
+                        return new Error("The count must be a number!")
+                    }
+
+                    if  (props[propName] > 100) {
+                        return new Error("The number of notes: " + props[propName] + " is ridiculous!")
+                    }
+                }
+            }
+
+            ReactDOM.render(<Board count={1000}></Board>,
                 document.getElementById('react-container'))
         </script>
     </body>
