@@ -13,20 +13,26 @@
 
         <script type="text/babel">
             class Note extends React.Component {
-                render() {
+                edit () {
+                    alert('Editing the note')
+                }
+                remove () {
+                    alert('Deleting the note')
+                }
+                render () {
                     return (
                         <div className='note'>
-                            <p></p>
+                            <p>{this.props.children}</p>
                             <span>
-                                <button>EDIT</button>
-                                <button>X</button>
+                                <button onClick={this.edit}>EDIT</button>
+                                <button onClick={this.remove}>X</button>
                             </span>
                         </div>
                     )
                 }
             }
 
-            ReactDOM.render(<Note></Note>,
+            ReactDOM.render(<Note>Testing Note</Note>,
                 document.getElementById('react-container'))
         </script>
     </body>
