@@ -17,6 +17,17 @@
                     super(props)
                     this.state = {editing: false}
                 }
+
+                componentWillMount () {
+                    this.style = {
+                        right: this.randomBetween(0, window.innerWidth - 150, 'px'),
+                        top: this.randomBetween(0, window.innerHeight - 150, 'px')
+                    }
+                }
+
+                randomBetween (x, y, s) {
+                    return (x + Math.ceil(Math.random() * (y-x))) + s
+                }
                 
                 edit () {
                     this.setState({editing: true})
@@ -33,7 +44,7 @@
 
                 renderForm () {
                     return (
-                        <div className="note">
+                        <div className="note" style={this.style}>
                             <textarea ref="newText"></textarea>
                             <button onClick={this.save.bind(this)}>Save</button>
                         </div>
@@ -42,7 +53,7 @@
 
                 renderDisplay () {
                     return (
-                        <div className='note'>
+                        <div className='note' style={this.style}>
                             <p>{this.props.children}</p>
                             <span>
                                 <button onClick={this.edit.bind(this)}>EDIT</button>
@@ -68,14 +79,29 @@
                             {id: 0, note:'Call Jeffrey'},
                             {id: 1, note:'Study some VueJs'},
                             {id: 2, note:'Do some Karate'},
-                            {id: 3, note:'Katas Only'},
-                            {id: 4, note:'Don\'t try it, just do it'},
                         ]
                     }
 
                     this.update = this.update.bind(this)
                     this.remove = this.remove.bind(this)
                     this.eachNote = this.eachNote.bind(this)
+                    this.add = this.add.bind(this)
+                }
+
+                nextId () {
+                    this.uniqueId = this.uniqueId || 3
+                    return this.uniqueId++
+                }
+
+                add (text) {
+                    var notes = [
+                        ...this.state.notes,
+                        {
+                            id: this.nextId(),
+                            note: text
+                        }
+                    ]
+                    this.setState({notes})
                 }
 
                 update (newText, id) {
@@ -108,6 +134,7 @@
                     return (
                         <div className="board">
                             {this.state.notes.map(this.eachNote)}
+                            <button onClick={ () => this.add('New Note')}>+</button>
                         </div>
                     )
                 }
