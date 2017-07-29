@@ -11,7 +11,7 @@
         <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://npmcdn.com/react-draggable"></script>
 
         <script type="text/babel">
@@ -111,15 +111,16 @@
                 componentWillMount() {
                     if (this.props.count) {
                         var url = `http://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`
-                        fetch(url)
-                              .then(results => results.json())
-                              .then(array => array[0])
-                              .then(text => text.split('. '))
-                              .then(array => array.forEach(
-                                    sentence => this.add(sentence)))
-                              .catch(function(err) {
-                                console.log("Didn't connect to the API", err)
-                              })
+                        axios.get(url)
+                        .then(results => results.data)
+                        .then(array => array[0])
+                        .then(text => text.split('. '))
+                        .then(array => array.forEach(
+                            sentence => this.add(sentence)))
+                        .catch(function(err) {
+                            console.log("Didn't connect to the API", err)
+                        })
+                              
                     }
                 }
 
