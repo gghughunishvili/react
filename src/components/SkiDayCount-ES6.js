@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { Component, PropTypes } from 'react'
 import '../stylesheets/ui.scss'
 import Terrain from 'react-icons/lib/md/terrain'
 import SnowFlake from 'react-icons/lib/ti/weather-snow'
@@ -49,7 +49,8 @@ SkiDayCount.defaultProps = {
   goal: 200
 }
 
-
-
-
-
+SkiDayCount.propTypes = {
+  total: PropTypes.Number.isRequired,
+  powder: PropTypes.Number.isRequired,
+  backcountry: PropTypes.Number.isRequired,
+}
