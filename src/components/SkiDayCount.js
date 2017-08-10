@@ -23,8 +23,8 @@ export const SkiDayCount = ({total, powder, backcountry, goal}) => (
 				<span> hiking days</span>
 			</div>
 			<div>
-				<span>Goal Progress: </span>
 				<span>{calcGoalProgress(total, goal)}</span>
+				<span>Goal Progress</span>
 			</div>
 		</div>
 )
