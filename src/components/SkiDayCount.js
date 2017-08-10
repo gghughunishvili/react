@@ -2,6 +2,14 @@ import React from 'react'
 import '../stylesheets/ui.scss'
 
 export const SkiDayCount = React.createClass({
+	decimalToPercent(decimal) {
+		return ((decimal) * 100 + "%")
+	},
+	
+	calcGoalProgress(total, goal) {
+		return this.decimalToPercent(total/goal);
+	},
+	
 	render() {
 		return (
 			<div className="ski-day-count">
@@ -17,7 +25,10 @@ export const SkiDayCount = React.createClass({
 					<span>{this.props.backcountry}</span>
 					<span> hiking days</span>
 				</div>
-				<div>Goal: {this.props.goal}</div>
+				<div>
+					<span>Goal Progress: </span>
+					<span>{this.calcGoalProgress(this.props.total, this.props.goal)}</span>
+				</div>
 			</div>
 		)
 	}
