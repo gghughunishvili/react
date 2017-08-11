@@ -29,6 +29,7 @@ export class App extends Component {
                 }
             ]
         }
+        this.addDay = this.addDay.bind(this)
     }
 
     countDays(filter) {
@@ -41,6 +42,15 @@ export class App extends Component {
         }).length
     }
 
+    addDay(newDay) {
+        this.setState({
+            allSkiDays: [
+                ...this.state.allSkiDays,
+                newDay
+            ]
+        })
+    }
+
     render() {
         return (
             <div className="app">
@@ -50,7 +60,7 @@ export class App extends Component {
                              powder={this.countDays("powder")}
                              backcountry={this.countDays("backcountry")} /> :
                 (this.props.location.pathname === '/add-day') ? 
-                <AddDayForm /> :
+                <AddDayForm onNewDay={this.addDay} /> :
                 <SkiDayList days={this.state.allSkiDays}
                         filter={this.props.params.filter}/>
                 }
