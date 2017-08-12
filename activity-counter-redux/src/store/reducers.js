@@ -77,6 +77,7 @@ export const suggestions = (state=[], action) => {
 }
 
 export default combineReducers({
+    allSkiDays,
     goal,
     skiDay,
     errors,
