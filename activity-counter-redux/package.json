@@ -1,0 +1,26 @@
+{
+  "name": "ski-day-counter",
+  "version": "1.0.0",
+  "description": "Just simple react-redux learning project",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/babel-node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gghughunishvili/react/activity-counter-redux"
+  },
+  "keywords": [
+    "React",
+    "Redux",
+    "Beginner",
+    "Learning"
+  ],
+  "author": "Giorgi Ghughunishvili",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}

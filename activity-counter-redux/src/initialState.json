@@ -1,0 +1,35 @@
+{
+    "allSkyDays": [
+        {
+            "resort": "Mountain View",
+            "date": "2017-08-02",
+            "powder": true,
+            "backcountry": false,
+        },
+        {
+            "resort": "Victoria Waterfall",
+            "date": "2017-08-04",
+            "powder": false,
+            "backcountry": false,
+        },
+        {
+            "resort": "Baja California",
+            "date": "2017-07-22",
+            "powder": true,
+            "backcountry": true,
+        },
+        {
+            "resort": "Skytop Lodge",
+            "date": "2017-04-10",
+            "powder": false,
+            "backcountry": true,
+        },
+    ],
+    "goal": 10,
+    "errors": [],
+    "resortNames": {
+        "fetching": false,
+        "suggestions": ["Hidden Valley", "Snowbird", "Swain", "Mount Shasta Ski Park", "Bear Valley"]
+    }
+
+}
