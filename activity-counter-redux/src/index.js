@@ -1,13 +1,41 @@
 import C from "./constants"
-import { goal } from "./store/reducers"
+import { skiDay, errors } from "./store/reducers"
 
-const state = 10
+const state = null
+
+const errorState = [
+    "user not authorized",
+    "wrong type of variable has been passed"
+]
 
 const action = {
-    "type": C.SET_GOAL,
-    "payload": 15,
+    "type": C.ADD_DAY,
+    "payload": {
+        "resort": "Some Resort",
+        "date": "2017-11-11",
+        "powder": false,
+        "backcountry": true
+    },
 }
 
-const nextState = goal(state, action)
+const nextState = skiDay(state, action)
 
 console.log(nextState)
+
+const errorAction = {
+    "type": C.ADD_ERROR,
+    "payload": "Cannot connect to server",
+}
+
+const errorNextState = errors(errorState, errorAction)
+
+console.log(errorNextState)
+
+const errorClearAction = {
+    "type": C.CLEAR_ERROR,
+    "payload": 0,
+}
+
+const errorClearNextState = errors(errorState, errorClearAction)
+
+console.log(errorClearNextState)
