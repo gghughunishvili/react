@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import fetchWeather from '../actions/index'
 
 class SearchBar extends Component {
   constructor (props) {
