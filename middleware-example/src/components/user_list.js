@@ -32,7 +32,7 @@ class UserList extends Component {
 }
 
 function mapStateToProps (state) {
-    return { users: state.users[0] }
+    return { users: state.users }
 }
 
 export default connect(mapStateToProps, actions)(UserList)
