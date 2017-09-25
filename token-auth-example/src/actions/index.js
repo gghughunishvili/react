@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { browserHistory } from 'react-router'
-import { AUTH_USER, AUTH_ERROR, DEAUTH_USER } from './types'
+import { AUTH_USER, AUTH_ERROR, DEAUTH_USER, FETCH_USER} from './types'
 
 const config = require('../../config.js')
 
@@ -52,4 +52,18 @@ export function signoutUser () {
     localStorage.removeItem('access_token')
 
     return {type: DEAUTH_USER}
+}
+
+export function fetchUser () {
+    return function (dispatch) {
+        axios.get(`${ROOT_URL}/users/me`, {
+            headers: { authorization: 'Bearer ' + localStorage.getItem('access_token')}
+        })
+        .then(response => {
+            return dispatch({
+                type: FETCH_USER,
+                payload: response.data
+            })
+        })
+    }
 }
