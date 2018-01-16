@@ -5,11 +5,16 @@ import classes from './style.css'
 
 class Burger extends Component {
     render() {
+        const transformedIngredients = Object.keys(this.props.ingredients)
+            .map(ingrKey => {
+                return [...Array(this.props.ingredients[ingrKey])].map((_, i) => {
+                    return <BurgerIngredient key={ingrKey + 1} type={ingrKey}/>
+                })
+            })
         return (
             <div className={classes.burger}>
                 <BurgerIngredient type="bread-top" />
-                <BurgerIngredient type="cheese" />
-                <BurgerIngredient type="meat" />
+                {transformedIngredients}
                 <BurgerIngredient type="bread-bottom" />
             </div>
         )
