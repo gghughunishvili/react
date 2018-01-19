@@ -1,15 +1,26 @@
 import React from 'react'
 
-import classes from './style.css'
+// import classes from './style.css'
 import Aux from '../../../hoc/Aux'
 
 const orderSummary = (props) => {
-   return (
-        <Aux>
-            <h3>Your Order</h3>
-            <p>A delicious order with the following ingredients:</p>
-        </Aux>
-   )
-}
+    const ingredientSummary = Object.keys(props.ingredients)
+        .map((ingredient)=>{
+            return (
+                <li key={ingredient}>
+                    <span style={{textTransform: 'capitalize'}}>{ingredient}</span>: {props.ingredients[ingredient]}
+                </li>)
+        })
+    return (
+            <Aux>
+                <h3>Your Order</h3>
+                <p>A delicious order with the following ingredients:</p>
+                <ul>
+                    {ingredientSummary}
+                </ul>
+                <p>Continue to checkout?</p>
+            </Aux>
+    )
+} 
 
 export default orderSummary
